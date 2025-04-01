@@ -4,7 +4,7 @@ import threading
 import multiprocessing
 from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 from pathlib import Path
-from time import time
+import time  
 
 def sort_files_by_extension(source_dir, target_dir="dist"):
     source_path = Path(source_dir)
@@ -38,20 +38,19 @@ def factorize_parallel(*numbers):
         return list(executor.map(factorize_number, numbers))
 
 if __name__ == "__main__":
-    # Перевірка сортування файлів
     source_directory = "picture"
     target_directory = "dist"
     sort_files_by_extension(source_directory, target_directory)
     
-    # Тестування факторизації
+
     numbers = [128, 255, 99999, 10651060]
     
-    start = time()
+    start = time.time()  
     result_sync = factorize_sync(*numbers)
-    print("Sync time:", time() - start)
+    print("Sync time:", time.time() - start)  
     
-    start = time()
+    start = time.time()  
     result_parallel = factorize_parallel(*numbers)
-    print("Parallel time:", time() - start)
+    print("Parallel time:", time.time() - start)  
     
     assert result_sync == result_parallel
